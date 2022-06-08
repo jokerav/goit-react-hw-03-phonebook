@@ -8,7 +8,10 @@ export class App extends Component {
     contacts: [],
     filter: '',
   };
-  initialContact = contacts => this.setState({ contacts });
+
+  initialContact = contacts => {
+    this.setState({ contacts });
+  };
 
   isNameInPhonebook = name => {
     const nameInLowerCase = name.toLowerCase();
