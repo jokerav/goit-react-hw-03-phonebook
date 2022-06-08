@@ -7,9 +7,10 @@ class ContactList extends Component {
     const contacts = localStorage.getItem('contacts');
     initialContact(JSON.parse(contacts));
   }
-  componentDidUpdate(prevProps, _) {
-    if (prevProps.contacts !== this.props.contacts) {
-      localStorage.setItem('contacts', JSON.stringify(this.props.contacts));
+  componentDidUpdate(prevProps) {
+    const { contacts } = this.props;
+    if (prevProps.contacts !== contacts) {
+      localStorage.setItem('contacts', JSON.stringify(contacts));
     }
   }
   render() {

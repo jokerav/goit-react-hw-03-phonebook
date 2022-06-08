@@ -8,10 +8,7 @@ export class App extends Component {
     contacts: [],
     filter: '',
   };
-
-  initialContact = contacts => {
-    this.setState({ contacts });
-  };
+  initialContact = contacts => this.setState({ contacts });
 
   isNameInPhonebook = name => {
     const nameInLowerCase = name.toLowerCase();
@@ -22,7 +19,6 @@ export class App extends Component {
     }
     return false;
   };
-
   addContact = contact => {
     const { name } = contact;
     if (!this.isNameInPhonebook(name)) {
@@ -36,13 +32,11 @@ export class App extends Component {
     const { value } = e.currentTarget;
     this.setState({ filter: value });
   };
-
   deleteContact = id => {
     this.setState(prevState => ({
       contacts: prevState.contacts.filter(contact => contact.id !== id),
     }));
   };
-
   render() {
     const normFilter = this.state.filter.toLowerCase();
     const visibleContacts = this.state.contacts.filter(contact =>
