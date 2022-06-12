@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import Contact from '../Contact/Contact';
 const ContactList = ({ contacts, onDelete }) => {
-  // const { contacts, onDelete } = this.props;
   return (
     <ul>
       {contacts.map(contact => (
