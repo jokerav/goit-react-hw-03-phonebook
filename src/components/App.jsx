@@ -10,17 +10,14 @@ export class App extends Component {
   };
   componentDidMount() {
     const contacts = localStorage.getItem('contacts');
-    this.initialContact(JSON.parse(contacts));
+    this.setState({ contacts: JSON.parse(contacts) });
   }
-  componentDidUpdate(prevProps) {
-    const { contacts } = this.props;
-    if (prevProps.contacts !== contacts) {
+  componentDidUpdate(prevState) {
+    const { contacts } = this.state;
+    if (prevState.contacts !== contacts) {
       localStorage.setItem('contacts', JSON.stringify(contacts));
     }
   }
-
-  initialContact = contacts => this.setState({ contacts });
-
   isNameInPhonebook = name => {
     const nameInLowerCase = name.toLowerCase();
     for (const contact of this.state.contacts) {
@@ -49,8 +46,9 @@ export class App extends Component {
     }));
   };
   render() {
-    const normFilter = this.state.filter.toLowerCase();
-    const visibleContacts = this.state.contacts.filter(contact =>
+    const { filter, contacts } = this.state;
+    const normFilter = filter.toLowerCase();
+    const visibleContacts = contacts.filter(contact =>
       contact.name.toLowerCase().includes(normFilter)
     );
     return (
@@ -64,11 +62,7 @@ export class App extends Component {
         <ContactForm onSubmit={this.addContact} />
         <Filter value={this.state.filter} onChange={this.onFilterChange} />
         <h2>Contacts</h2>
-        <ContactList
-          contacts={visibleContacts}
-          onDelete={this.deleteContact}
-          initialContact={this.initialContact}
-        />
+        <ContactList contacts={visibleContacts} onDelete={this.deleteContact} />
       </div>
     );
   }
