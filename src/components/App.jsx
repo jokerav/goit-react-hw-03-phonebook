@@ -8,6 +8,17 @@ export class App extends Component {
     contacts: [],
     filter: '',
   };
+  componentDidMount() {
+    const contacts = localStorage.getItem('contacts');
+    this.initialContact(JSON.parse(contacts));
+  }
+  componentDidUpdate(prevProps) {
+    const { contacts } = this.props;
+    if (prevProps.contacts !== contacts) {
+      localStorage.setItem('contacts', JSON.stringify(contacts));
+    }
+  }
+
   initialContact = contacts => this.setState({ contacts });
 
   isNameInPhonebook = name => {

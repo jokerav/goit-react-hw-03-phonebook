@@ -2,17 +2,6 @@ import PropTypes from 'prop-types';
 import { Component } from 'react';
 import Contact from '../Contact/Contact';
 class ContactList extends Component {
-  componentDidMount() {
-    const { initialContact } = this.props;
-    const contacts = localStorage.getItem('contacts');
-    initialContact(JSON.parse(contacts));
-  }
-  componentDidUpdate(prevProps) {
-    const { contacts } = this.props;
-    if (prevProps.contacts !== contacts) {
-      localStorage.setItem('contacts', JSON.stringify(contacts));
-    }
-  }
   render() {
     const { contacts, onDelete } = this.props;
     return (
