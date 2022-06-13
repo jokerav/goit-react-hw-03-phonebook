@@ -8,9 +8,16 @@ export class App extends Component {
     contacts: [],
     filter: '',
   };
+  // componentDidMount() {
+  //   const contacts = localStorage.getItem('contacts');
+  //   this.setState({ contacts: JSON.parse(contacts) });
+  // }
   componentDidMount() {
-    const contacts = localStorage.getItem('contacts');
-    this.setState({ contacts: JSON.parse(contacts) });
+    const localContacts = localStorage.getItem('contacts');
+    const parseContacts = JSON.parse(localContacts);
+    if (parseContacts) {
+      this.setState({ contacts: parseContacts });
+    }
   }
   componentDidUpdate(prevState) {
     const { contacts } = this.state;
